@@ -4,7 +4,6 @@
 
 ## 설치
 
----
 ```bash
 $ git clone https://github.com/Malloc314159/chzzk-roulette
 $ cd chzzk-roulette
@@ -19,14 +18,12 @@ $ pip install requests
 
 ## 쿠키 값 찾는 법
 
----
 1. [치지직](https://chzzk.naver.com) 접속
 2. F12를 눌러 개발자 도구 접속 후 쿠키 탭에 들어가 'NID_AUT'와 'NID_SES' 값을 찾습니다.
 3. 해당 값을 main.py에 붙여 넣습니다.
 
 ## 실행
 
----
 ```commandline
 python main.py
 
