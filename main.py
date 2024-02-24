@@ -170,8 +170,6 @@ class ChzzkChat:
                 pass
 
     def roulette(self, rNum):
-        r1dict={'방종': 0.1, '방송연장': 0.1, '꽝': 0.8}
-        r2dict={'방종': 0.05, '방송연장': 0.25, '꽝': 0.2, '노래방': 0.3, '소원권': 0.2}
         randomNum=rd.random()
         if rNum==1:
             selectedDict=r1dict
@@ -202,14 +200,17 @@ def get_logger():
 
 
 if __name__ == '__main__':
+    with open('data.json', 'r', encoding='utf-8') as f:
+        json_data = json.load(f)
+
     parser = argparse.ArgumentParser()
-    parser.add_argument('--streamer_id', type=str, default='6e06f5e1907f17eff543abd06cb62891')
+    parser.add_argument('--streamer_id', type=str, default=json_data['streamer_id'])
     args = parser.parse_args()
 
-    cookies = {
-        "NID_AUT" : "Put your AUT Cookie HERE",
-        "NID_SES" : "Put your SES Cookie HERE"
-    }
+    cookies = json_data['cookie']
+
+    r1dict=json_data['roulette']['r1dict']
+    r2dict=json_data['roulette']['r2dict']
 
     logger = get_logger()
     chzzkchat = ChzzkChat(args.streamer_id, cookies, logger)
