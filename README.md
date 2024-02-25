@@ -16,16 +16,16 @@ $ pip install websocket-client
 $ pip install requests
 ```
 
-## 쿠키 값 찾는 법
+## 초기 설정 & 쿠키 값 찾는 법
 
-1. [치지직](https://chzzk.naver.com) 접속
-2. F12를 눌러 개발자 도구 접속 후 쿠키 탭에 들어가 'NID_AUT'와 'NID_SES' 값을 찾습니다.
-3. 해당 값을 main.py에 붙여 넣습니다.
+1. data.json 샘플 파일을 [이 링크](https://drive.google.com/file/d/1CqT_eYzQrURaGPSPbfm5HYvJsXNjWLEO/view?usp=sharing)에서 다운받습니다.
+2. [치지직](https://chzzk.naver.com)에 접속합니다.
+3. F12를 눌러 개발자 도구 접속 후 쿠키 탭에 들어가 'NID_AUT'와 'NID_SES' 값을 찾습니다.
+4. 해당 값을 data.json 파일에 붙여 넣습니다.
+5. 룰렛 오버레이를 적용하고자 하는 스트리머 본인의 id 값을 streamer_id 값으로 지정합니다.
 
 ## 실행
 
 ```commandline
 python main.py
-
-python main.py --streamer_id (스트리머 ID)
 ```
