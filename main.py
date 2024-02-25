@@ -153,33 +153,22 @@ class ChzzkChat:
                     print(donated)
 
                     #if '룰렛' in chat_data['msg']:
-                    rouletteCount=0
-                    if donated >= 10000:
-                        rouletteCount = donated // 10000
+                    for k in roulettelist:
+                        rouletteCount = donated // k
+                        donated -= rouletteCount*k
                         for i in range(rouletteCount):
-                            result=self.roulette(2)
+                            result=self.roulette(k)
                             print(result)
-                    else:
-                        rouletteCount = donated // 1000
-                        for i in range(rouletteCount):
-                            result=self.roulette(1)
-                            print(result)
+                    
 
             except:
                 print('error from run function')
                 pass
 
     def roulette(self, rNum):
-        randomNum=rd.random()
-        if rNum==1:
-            selectedDict=r1dict
-        else:
-            selectedDict=r2dict
-        tmpSum=0
-        for k, v in selectedDict.items():
-            tmpSum+=v
-            if randomNum<=tmpSum:
-                return k
+        selectedDict = json_data['roulette'][str(rNum)]
+        return rd.choices(list(selectedDict.keys()), weights=list(selectedDict.values()), k=1)
+
 
 
 def get_logger():
@@ -209,8 +198,7 @@ if __name__ == '__main__':
 
     cookies = json_data['cookie']
 
-    r1dict=json_data['roulette']['r1dict']
-    r2dict=json_data['roulette']['r2dict']
+    roulettelist = sorted(list(map(int, list(json_data['roulette'].keys()))), reverse=True)
 
     logger = get_logger()
     chzzkchat = ChzzkChat(args.streamer_id, cookies, logger)
