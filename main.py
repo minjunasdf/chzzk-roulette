@@ -133,6 +133,8 @@ class ChzzkChat:
 
                     if chat_data['uid'] == 'anonymous':
                         nickname = '익명의 후원자'
+                        extra_data = json.loads(chat_data['extras'])
+                        donated = extra_data["payAmount"]
 
                     else:
                         try:
@@ -152,22 +154,21 @@ class ChzzkChat:
 
                     print(donated)
 
-                    #if '룰렛' in chat_data['msg']:
+                    # if '룰렛' in chat_data['msg']:
                     for k in roulettelist:
                         rouletteCount = donated // k
                         donated -= rouletteCount*k
                         for i in range(rouletteCount):
-                            result=self.roulette(k)
+                            result = self.roulette(k)
                             print(result)
                     
 
             except:
                 print('error from run function')
-                pass
 
     def roulette(self, rNum):
         selectedDict = json_data['roulette'][str(rNum)]
-        return rd.choices(list(selectedDict.keys()), weights=list(selectedDict.values()), k=1)
+        return rd.choices(list(selectedDict.keys()), weights=list(selectedDict.values()), k=1)[0]
 
 
 
