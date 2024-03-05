@@ -8,6 +8,9 @@ from websocket import WebSocket
 from chat_cmd import CHAT_CMD
 import api
 
+from flask import Flask,render_template
+
+
 class ChzzkChat:
 
     def __init__(self, streamer, cookies, logger):
@@ -150,7 +153,9 @@ class ChzzkChat:
                     now = datetime.datetime.fromtimestamp(chat_data['msgTime'] / 1000)
                     now = datetime.datetime.strftime(now, '%Y-%m-%d %H:%M:%S')
 
-                    self.logger.info(f'[{now}] {nickname} : {chat_data["msg"]} / {donated}')
+
+                    # 대충 룰렛 로그 적어두기
+                    # self.logger.info(f'[{now}] {nickname} : {chat_data["msg"]} / {donated}')
 
                     print(donated)
 
@@ -188,6 +193,15 @@ def get_logger():
 
     return logger
 
+app = Flask(__name__)
+
+@app.route("/")
+def web_roulette():
+    return "<p>hello</p>"
+
+@app.route("/<string:streamer_id>/")
+def roulette(streamer_id):
+    return streamer_id
 
 if __name__ == '__main__':
     with open('data.json', 'r', encoding='utf-8') as f:
@@ -203,5 +217,7 @@ if __name__ == '__main__':
 
     logger = get_logger()
     chzzkchat = ChzzkChat(args.streamer_id, cookies, logger)
+    
+    app.run()
 
     chzzkchat.run()
