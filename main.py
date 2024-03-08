@@ -201,7 +201,7 @@ def web_roulette():
 
 @app.route("/<string:streamer_id>/")
 def roulette(streamer_id):
-    return streamer_id
+    return render_template('roulette.html')
 
 if __name__ == '__main__':
     with open('data.json', 'r', encoding='utf-8') as f:
